@@ -61,6 +61,8 @@ public class BrowserView {
     private Button myBackButton;
     private Button myNextButton;
     private Button myHomeButton;
+    private Button myFavoriteButton;
+    private Button myGetFavButton;
     // favorites
     private ComboBox<String> myFavorites;
     // get strings from resource file
@@ -73,6 +75,7 @@ public class BrowserView {
      */
     public BrowserView (BrowserModel model, String language) {
         myModel = model;
+        myFavorites = new ComboBox<String>();
         // use resources for labels
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
         BorderPane root = new BorderPane();
@@ -210,6 +213,19 @@ public class BrowserView {
         result.getChildren().add(myNextButton);
         myHomeButton = makeButton("HomeCommand", event -> home());
         result.getChildren().add(myHomeButton);
+        myFavoriteButton = makeButton("AddFavoriteCommand", event ->addFavorite());
+        result.getChildren().add(myFavoriteButton);
+//        myGetFavButton = makeButton("FavoriteFirstItem", event -> showFavorite());
+//        result.getChildren().add(myGetFavButton);
+        
+        result.getChildren().add(myFavorites);
+        myFavorites.setOnAction(new EventHandler<ActionEvent>() {
+            @Override      
+            public void handle (ActionEvent event) {       
+                 String url =  myModel.getFavorite(myFavorites.getOnAction().toString()).toString();
+            	showPage(url);        
+            }      
+        });
         // if user presses button or enter in text field, load/show the URL
         EventHandler<ActionEvent> showHandler = new ShowPage();
         result.getChildren().add(makeButton("GoCommand", showHandler));
@@ -217,6 +233,7 @@ public class BrowserView {
         result.getChildren().add(myURLDisplay);
         return result;
     }
+    
 
     // make buttons for setting favorites/home URLs
     private Node makePreferencesPanel () {
