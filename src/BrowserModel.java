@@ -36,8 +36,9 @@ public class BrowserModel {
 
     /**
      * Returns the first page in next history, null if next history is empty.
+     * @throws BrowserException 
      */
-    public URL next () {
+    public URL next () throws BrowserException {
         if (hasNext()) {
             myCurrentIndex++;
             return myHistory.get(myCurrentIndex);

@@ -222,7 +222,8 @@ public class BrowserView {
         myFavorites.setOnAction(new EventHandler<ActionEvent>() {
             @Override      
             public void handle (ActionEvent event) {       
-                 String url =  myModel.getFavorite(myFavorites.getOnAction().toString()).toString();
+            	String a= myFavorites.getValue;
+                 String url =  myModel.getFavorite(a).toString();
             	showPage(url);        
             }      
         });
