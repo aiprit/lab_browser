@@ -1,2 +1,5 @@
 # lab_browser
-A simple GUI example: a web browser
+
+People
+Parit Burintrathikul pb111
+Zdravko Paskalev zp12
